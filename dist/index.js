@@ -707,12 +707,13 @@ class ActionInputs {
 /***/ }),
 
 /***/ 9112:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.pullRequestText = void 0;
+const github_1 = __nccwpck_require__(5438);
 const ISSUES_URL = 'https://github.com/gradle-update/update-gradle-wrapper-action/issues';
 function pullRequestText(distTypes, targetRelease, sourceVersion) {
     const targetVersion = targetRelease.version;
@@ -736,6 +737,8 @@ Read the release notes: https://docs.gradle.org/${targetVersion}/release-notes.h
 
 You can find the reference checksum values at https://gradle.org/release-checksums/`;
     const bodyFooter = `🤖 This PR has been created by the [Update Gradle Wrapper](https://github.com/gradle-update/update-gradle-wrapper-action) action.
+
+https://github.com/${github_1.context.repo.owner}/${github_1.context.repo.repo}/actions/runs/${github_1.context.runId}
 
 <details>
 <summary>Need help? 🤔</summary>
@@ -983,8 +986,8 @@ function runMain() {
             core.debug(`Wrappers count: ${wrappers.length}`);
             const wrapperInfos = wrappers.map(path => new wrapperInfo_1.WrapperInfo(path));
             const commitDataList = [];
-            yield git.config('user.name', 'gradle-update-robot');
-            yield git.config('user.email', 'gradle-update-robot@regolo.cc');
+            yield git.config('user.name', 'github-actions[bot]');
+            yield git.config('user.email', 'no-reply@github.com');
             core.startGroup('Creating branch');
             const branchName = `gradlew-update-${targetRelease.version}`;
             yield git.checkout(branchName, currentCommitSha);

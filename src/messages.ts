@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {context} from '@actions/github';
+
 import {Release} from './releases';
 
 const ISSUES_URL =
@@ -50,6 +52,8 @@ Read the release notes: https://docs.gradle.org/${targetVersion}/release-notes.h
 You can find the reference checksum values at https://gradle.org/release-checksums/`;
 
   const bodyFooter = `🤖 This PR has been created by the [Update Gradle Wrapper](https://github.com/gradle-update/update-gradle-wrapper-action) action.
+
+https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}
 
 <details>
 <summary>Need help? 🤔</summary>

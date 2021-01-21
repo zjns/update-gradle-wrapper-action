@@ -79,8 +79,8 @@ export async function runMain() {
       sourceVersion: string;
     }[] = [];
 
-    await git.config('user.name', 'gradle-update-robot');
-    await git.config('user.email', 'gradle-update-robot@regolo.cc');
+    await git.config('user.name', 'github-actions[bot]');
+    await git.config('user.email', 'no-reply@github.com');
 
     core.startGroup('Creating branch');
     const branchName = `gradlew-update-${targetRelease.version}`;
