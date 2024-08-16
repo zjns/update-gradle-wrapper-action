@@ -13,14 +13,16 @@
 // limitations under the License.
 
 import * as git from './git-cmds';
+import {pullRequestTitle} from '../messages';
 
 export async function commit(
   files: string[],
+  prTitleTemplate: string,
   targetVersion: string,
   sourceVersion: string
 ) {
   await git.add(files);
   await git.commit(
-    `Update Gradle Wrapper from ${sourceVersion} to ${targetVersion}.`
+    pullRequestTitle(prTitleTemplate, sourceVersion, targetVersion)
   );
 }

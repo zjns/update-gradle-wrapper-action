@@ -160,7 +160,12 @@ export class MainAction {
           core.endGroup();
 
           core.startGroup('Committing');
-          await commit(modifiedFiles, targetRelease.version, wrapper.version);
+          await commit(
+            modifiedFiles,
+            this.inputs.prTitleTemplate,
+            targetRelease.version,
+            wrapper.version
+          );
           core.endGroup();
 
           commitDataList.push({

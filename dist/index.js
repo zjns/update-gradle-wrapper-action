@@ -280,10 +280,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.commit = void 0;
 const git = __importStar(__nccwpck_require__(8940));
-function commit(files, targetVersion, sourceVersion) {
+const messages_1 = __nccwpck_require__(9112);
+function commit(files, prTitleTemplate, targetVersion, sourceVersion) {
     return __awaiter(this, void 0, void 0, function* () {
         yield git.add(files);
-        yield git.commit(`Update Gradle Wrapper from ${sourceVersion} to ${targetVersion}.`);
+        yield git.commit((0, messages_1.pullRequestTitle)(prTitleTemplate, sourceVersion, targetVersion));
     });
 }
 exports.commit = commit;
@@ -1203,7 +1204,7 @@ class MainAction {
                         yield updater.verify();
                         core.endGroup();
                         core.startGroup('Committing');
-                        yield (0, git_commit_1.commit)(modifiedFiles, targetRelease.version, wrapper.version);
+                        yield (0, git_commit_1.commit)(modifiedFiles, this.inputs.prTitleTemplate, targetRelease.version, wrapper.version);
                         core.endGroup();
                         commitDataList.push({
                             files: modifiedFiles,
